@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-const connection = new Sequelize("lunes", "root", "", {
+const connection = new Sequelize("recet-api", "root", "", {
   host: "localhost",
   dialect: "mysql",
   port: 3306,
