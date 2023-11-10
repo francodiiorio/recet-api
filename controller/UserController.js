@@ -1,6 +1,6 @@
 import { User, Role } from '../models/index.js';
 
-class UserControler {
+class UserController {
   constructor() {}
 
   createUser = async (req, res) => {
@@ -8,7 +8,7 @@ class UserControler {
       const { name, email, roleId } = req.body;
       const user = await User.create({ name, email, roleId });
       if (!user) throw new Error(' no se pudo crear el usuario');
-      res.status(200).send({ success: false, message: user });
+      res.status(200).send({ success: true, message: user });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -24,14 +24,14 @@ class UserControler {
           },
         ],
       });
-      res.status(200).send({ success: false, message: users });
+      res.status(200).send({ success: true, message: users });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
   getUserbyId = async (req, res) => {
     try {
-      res.status(200).send({ success: false, message: 'ok' });
+      res.status(200).send({ success: true, message: 'ok' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -47,7 +47,7 @@ class UserControler {
         }
       );
       if (!user[0]) throw new Error('no se encontro usuario para modificar');
-      res.status(200).send({ success: false, message: 'usuario modificado' });
+      res.status(200).send({ success: true, message: 'usuario modificado' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -67,17 +67,17 @@ class UserControler {
   };
   login = async (req, res) => {
     try {
-      res.status(200).send({ success: false, message: 'ok' });
+      res.status(200).send({ success: true, message: 'ok' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
   me = async (req, res) => {
     try {
-      res.status(200).send({ success: false, message: 'ok' });
+      res.status(200).send({ success: true, message: 'ok' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
 }
-export default UserControler;
+export default UserController;

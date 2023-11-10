@@ -30,7 +30,8 @@ cd tuproyecto
 
 ### 2-Instalar Dependencias:
 
-npm install
+npm install,
+npm i express cors mysql2 sequelize
 
 ### 3-Configurar la Base de Datos:
 
@@ -41,7 +42,7 @@ Crea un nuevo archivo llamado .env y configura las variables de entorno, incluye
 
 npm start
 
-### El servidor estará disponible en http://localhost:8080 (o el puerto que hayas configurado).
+## El servidor estará disponible en http://localhost:8080 (o el puerto que hayas configurado).
 
 ## Uso del API RESTful
 

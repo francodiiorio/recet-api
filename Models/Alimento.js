@@ -1,21 +1,21 @@
 import { DataTypes as DT, Model } from 'sequelize';
 import connection from '../connection/connection.js';
 
-class Role extends Model {}
+class Alimento extends Model {}
 
-Role.init(
+Alimento.init(
   {
-    roleName: {
+    alimentoName: {
       type: DT.STRING(50),
       // allowNull: false,
-      defaultValue: 'user',
+      defaultValue: 'sal',
       unique: true,
     },
   },
   {
     sequelize: connection,
-    modelName: 'Role',
+    modelName: 'Alimento',
   }
 );
 
-export default Role;
+export default Alimento;
