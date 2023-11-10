@@ -1,4 +1,4 @@
-import { User, Role } from "../Models/index.js";
+import { User, Role } from '../models/index.js';
 
 class UserControler {
   constructor() {}
@@ -7,7 +7,7 @@ class UserControler {
     try {
       const { name, email, roleId } = req.body;
       const user = await User.create({ name, email, roleId });
-      if (!user) throw new Error(" no se pudo crear el usuario");
+      if (!user) throw new Error(' no se pudo crear el usuario');
       res.status(200).send({ success: false, message: user });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -16,11 +16,11 @@ class UserControler {
   getAllUsers = async (req, res) => {
     try {
       const users = await User.findAll({
-        attributes: ["id", "name", "email"],
+        attributes: ['id', 'name', 'email'],
         include: [
           {
             model: Role,
-            attributes: ["roleName"],
+            attributes: ['roleName'],
           },
         ],
       });
@@ -31,7 +31,7 @@ class UserControler {
   };
   getUserbyId = async (req, res) => {
     try {
-      res.status(200).send({ success: false, message: "ok" });
+      res.status(200).send({ success: false, message: 'ok' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -46,8 +46,8 @@ class UserControler {
           where: { id },
         }
       );
-      if (!user[0]) throw new Error("no se encontro usuario para modificar");
-      res.status(200).send({ success: false, message: "usuario modificado" });
+      if (!user[0]) throw new Error('no se encontro usuario para modificar');
+      res.status(200).send({ success: false, message: 'usuario modificado' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -59,22 +59,22 @@ class UserControler {
         where: { id },
       });
 
-      if (!user) throw new Error("no se encontro usuario para eliminar");
-      res.status(200).send({ success:true, message: "Usuario eliminado" });
+      if (!user) throw new Error('no se encontro usuario para eliminar');
+      res.status(200).send({ success: true, message: 'Usuario eliminado' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
   login = async (req, res) => {
     try {
-      res.status(200).send({ success: false, message: "ok" });
+      res.status(200).send({ success: false, message: 'ok' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
   me = async (req, res) => {
     try {
-      res.status(200).send({ success: false, message: "ok" });
+      res.status(200).send({ success: false, message: 'ok' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
