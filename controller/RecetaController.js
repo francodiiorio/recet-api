@@ -26,22 +26,28 @@ class RecetaController {
   getRecetaById = async (req, res) => {
     try {
       const { id } = req.params;
-      //  const Receta = await Receta.findOne({
-      //    where: {
-      //      id,
-      //    },
-      //  });
-      const Receta = await Receta.findByPk(id);
-      if (!Receta) throw new Error('No existe el receta con ese ID');
 
-      res.status(200).send({ success: true, message: Receta });
+      const receta = await Receta.findByPk(id);
+      if (!receta) throw new Error('No existe el receta con ese ID');
+
+      res.status(200).send({ success: true, message: receta });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
   updateReceta = async (req, res) => {
     try {
-      res.status(200).send('update Receta');
+      const { recetaName } = req.body;
+      const { id } = req.params;
+      const receta = await Receta.update(
+        { recetaName },
+        {
+          where: { id },
+        }
+      );
+      if (!recetaName[0])
+        throw new Error('no se encontro receta para modificar');
+      res.status(200).send('Receta Updated');
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }

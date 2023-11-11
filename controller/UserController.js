@@ -31,7 +31,11 @@ class UserController {
   };
   getUserbyId = async (req, res) => {
     try {
-      res.status(200).send({ success: true, message: 'ok' });
+      const { id } = req.params;
+
+      const usuario = await User.findByPk(id);
+      if (!usuario) throw new Error('No existe el usuario con ese ID');
+      res.status(200).send({ success: true, message: usuario });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }

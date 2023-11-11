@@ -5,7 +5,7 @@ const alimentoController = new AlimentoController();
 
 alimentoRoutes.post('', alimentoController.createAlimento);
 alimentoRoutes.get('', alimentoController.getAllAlimentos);
-//alimentoRoutes.get('/:id', alimentoController.getAlimentoById);
+alimentoRoutes.get('/:id', alimentoController.getAlimentoById);
 alimentoRoutes.put('/:id', alimentoController.updateAlimento);
 alimentoRoutes.delete('/:id', alimentoController.deleteAlimento);
 

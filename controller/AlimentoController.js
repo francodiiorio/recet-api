@@ -23,14 +23,10 @@ class AlimentoController {
       res.status(400).send({ success: false, message: error.message });
     }
   };
-  getRoleById = async (req, res) => {
+  getAlimentoById = async (req, res) => {
     try {
       const { id } = req.params;
-      //  const role = await Role.findOne({
-      //    where: {
-      //      id,
-      //    },
-      //  });
+
       const alimento = await Alimento.findByPk(id);
       if (!alimento) throw new Error('No existe el alimento con ese ID');
 
@@ -41,7 +37,17 @@ class AlimentoController {
   };
   updateAlimento = async (req, res) => {
     try {
-      res.status(200).send('update alimento');
+      const { alimentoName } = req.body;
+      const { id } = req.params;
+      const alimento = await Alimento.update(
+        { alimentoName },
+        {
+          where: { id },
+        }
+      );
+      if (!alimento[0])
+        throw new Error('no se encontro alimento para modificar');
+      res.status(200).send('Alimento updated');
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -55,7 +61,7 @@ class AlimentoController {
       });
 
       if (!alimento) throw new Error('no se encontro alimento para eliminar');
-      res.status(200).send('delete alimento');
+      res.status(200).send('alimento eliminado');
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
