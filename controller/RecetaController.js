@@ -45,8 +45,7 @@ class RecetaController {
           where: { id },
         }
       );
-      if (!recetaName[0])
-        throw new Error('no se encontro receta para modificar');
+      if (!receta[0]) throw new Error('no se encontro receta para modificar');
       res.status(200).send('Receta Updated');
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -61,7 +60,7 @@ class RecetaController {
       });
 
       if (!receta) throw new Error('no se encontro receta para eliminar');
-      res.status(200).send('delete Receta');
+      res.status(200).send('Receta eliminada');
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
