@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import connection from "../connection/connection.js";
+import { DataTypes, Model } from 'sequelize';
+import connection from '../connection/connection.js';
 // import { Role } from "./index.js";
 class User extends Model {}
 
@@ -18,7 +18,7 @@ User.init(
       allowNull: false,
       validate: {
         isEmail: {
-          msg: "No tiene formato de email",
+          msg: 'No tiene formato de email',
         },
       },
     },
@@ -32,7 +32,7 @@ User.init(
   },
   {
     sequelize: connection,
-    modelName: "User",
+    modelName: 'User',
   }
 );
 

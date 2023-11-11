@@ -1,21 +1,21 @@
-import { DataTypes as DT, Model } from "sequelize";
-import connection from "../connection/connection.js";
+// import { DataTypes as DT, Model } from 'sequelize';
+// import connection from '../connection/connection.js';
 
-class Role extends Model {}
+// class Role extends Model {}
 
-Role.init(
-  {
-    roleName: {
-      type: DT.STRING(50),
-      // allowNull: false,
-      defaultValue: "user",
-      unique: true,
-    },
-  },
-  {
-    sequelize: connection,
-    modelName: "Role",
-  }
-);
+// Role.init(
+//   {
+//     roleName: {
+//       type: DT.STRING(50),
+//       // allowNull: false,
+//       defaultValue: 'user',
+//       unique: true,
+//     },
+//   },
+//   {
+//     sequelize: connection,
+//     modelName: 'Role',
+//   }
+// );
 
-export default Role;
+// export default Role;
