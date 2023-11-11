@@ -1,4 +1,4 @@
-import Role from './Role.js';
+// import Role from './Role.js';
 import User from './User.js';
 import Alimento from './Alimento.js';
 import Receta from './Receta.js';
@@ -18,4 +18,4 @@ Alimento.belongsTo(Receta, { foreignKey: 'recetaId' });
 // Role.hasMany(User);
 // User.belongsTo(Role);
 
-export { Role, User, Alimento, Receta };
+export { User, Alimento, Receta };

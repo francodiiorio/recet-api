@@ -1,12 +1,12 @@
-import { User, Role } from '../models/index.js';
+import { User } from '../models/index.js';
 
 class UserController {
   constructor() {}
 
   createUser = async (req, res) => {
     try {
-      const { name, email, roleId } = req.body;
-      const user = await User.create({ name, email, roleId });
+      const { name, email } = req.body;
+      const user = await User.create({ name, email });
       if (!user) throw new Error(' no se pudo crear el usuario');
       res.status(200).send({ success: true, message: user });
     } catch (error) {
@@ -18,10 +18,10 @@ class UserController {
       const users = await User.findAll({
         attributes: ['id', 'name', 'email'],
         include: [
-          {
-            model: Role,
-            attributes: ['roleName'],
-          },
+          // {
+          //   model: Role,
+          //   attributes: ['roleName'],
+          // },
         ],
       });
       res.status(200).send({ success: true, message: users });
@@ -38,10 +38,10 @@ class UserController {
   };
   updateUser = async (req, res) => {
     try {
-      const { name, email, roleId } = req.body;
+      const { name, email } = req.body;
       const { id } = req.params;
       const user = await User.update(
-        { name, email, roleId },
+        { name, email },
         {
           where: { id },
         }

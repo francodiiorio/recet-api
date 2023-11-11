@@ -5,7 +5,7 @@ class Recetas extends Model {}
 
 Recetas.init(
   {
-    recetasName: {
+    recetaName: {
       type: DT.STRING(50),
       // allowNull: false,
       defaultValue: 'recetaX',
@@ -14,7 +14,7 @@ Recetas.init(
   },
   {
     sequelize: connection,
-    modelName: 'Recetas',
+    modelName: 'Receta',
   }
 );
 

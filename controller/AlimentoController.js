@@ -49,6 +49,12 @@ class AlimentoController {
 
   deleteAlimento = async (req, res) => {
     try {
+      const { id } = req.params;
+      const alimento = await Alimento.destroy({
+        where: { id },
+      });
+
+      if (!alimento) throw new Error('no se encontro alimento para eliminar');
       res.status(200).send('delete alimento');
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });

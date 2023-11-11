@@ -1,6 +1,6 @@
 import { Receta } from '../models/index.js';
 
-class RecetaContrecetaler {
+class RecetaController {
   constructor() {}
 
   createReceta = async (req, res) => {
@@ -16,7 +16,7 @@ class RecetaContrecetaler {
   getAllRecetas = async (req, res) => {
     try {
       const allRecetas = await Receta.findAll({
-        attributes: ['id', 'RecetaName'],
+        attributes: ['id', 'recetaName'],
       });
       res.status(200).send({ success: true, message: allRecetas });
     } catch (error) {
@@ -49,6 +49,12 @@ class RecetaContrecetaler {
 
   deleteReceta = async (req, res) => {
     try {
+      const { id } = req.params;
+      const receta = await Receta.destroy({
+        where: { id },
+      });
+
+      if (!receta) throw new Error('no se encontro receta para eliminar');
       res.status(200).send('delete Receta');
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
@@ -56,4 +62,4 @@ class RecetaContrecetaler {
   };
 }
 
-export default RecetaContrecetaler;
+export default RecetaController;
