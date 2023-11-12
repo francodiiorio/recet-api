@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import connection from '../connection/connection.js';
-// import { Role } from "./index.js";
+import bcrypt from 'bcrypt'
 class User extends Model {}
 
 User.init(
@@ -22,18 +22,30 @@ User.init(
         },
       },
     },
-    //     roleId: {
-    //       type: DataTypes.INTEGER,
-    //       references: {
-    //         model: Role,
-    //         key: "id",
-    //       },
-    //     },
+    salt: {
+      type: DataTypes.STRING,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    accessToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     sequelize: connection,
     modelName: 'User',
   }
 );
+
+User.beforeCreate(async(user)=>{
+  const salt = await bcrypt.genSalt()
+  user.salt = salt
+
+  const hashPassword = await bcrypt.hash(user.password, salt)
+  user.password = hashPassword
+})
 
 export default User;

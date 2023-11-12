@@ -4,6 +4,7 @@ const userRoutes = Router();
 const userController = new UserController();
 
 userRoutes.post('/', userController.createUser);
+userRoutes.post('/login', userController.login);
 userRoutes.get('/', userController.getAllUsers);
 userRoutes.get('/:id', userController.getUserbyId);
 userRoutes.put('/:id', userController.updateUser);

@@ -5,8 +5,8 @@ class UserController {
 
   createUser = async (req, res) => {
     try {
-      const { name, email } = req.body;
-      const user = await User.create({ name, email });
+      const { name, email, password } = req.body;
+      const user = await User.create({ name, email, password });
       if (!user) throw new Error(' no se pudo crear el usuario');
       res.status(200).send({ success: true, message: user });
     } catch (error) {
@@ -71,6 +71,11 @@ class UserController {
   };
   login = async (req, res) => {
     try {
+      const {email, password} = req.body
+      const user = await User.findOne({
+        where: {email},
+      })
+      if(!user) throw new Error('Usuario no encontrado')
       res.status(200).send({ success: true, message: 'ok' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
