@@ -1,15 +1,18 @@
 import { DataTypes as DT, Model } from 'sequelize';
 import connection from '../connection/connection.js';
 
-class Recetas extends Model {}
+class Receta extends Model {}
 
-Recetas.init(
+Receta.init(
   {
     recetaName: {
       type: DT.STRING(50),
-      // allowNull: false,
-      defaultValue: 'recetaX',
+      defaultValue: 'x',
       unique: true,
+    },
+    calorias: {
+      type: DT.STRING(50),
+      defaultValue: '0',
     },
   },
   {
@@ -18,4 +21,4 @@ Recetas.init(
   }
 );
 
-export default Recetas;
+export default Receta;

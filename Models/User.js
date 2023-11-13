@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import connection from '../connection/connection.js';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 class User extends Model {}
 
 User.init(
@@ -40,12 +40,12 @@ User.init(
   }
 );
 
-User.beforeCreate(async(user)=>{
-  const salt = await bcrypt.genSalt()
-  user.salt = salt
+User.beforeCreate(async (user) => {
+  const salt = await bcrypt.genSalt();
+  user.salt = salt;
 
-  const hashPassword = await bcrypt.hash(user.password, salt)
-  user.password = hashPassword
-})
+  const hashPassword = await bcrypt.hash(user.password, salt);
+  user.password = hashPassword;
+});
 
 export default User;

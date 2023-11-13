@@ -17,12 +17,6 @@ class UserController {
     try {
       const users = await User.findAll({
         attributes: ['id', 'name', 'email'],
-        include: [
-          // {
-          //   model: Role,
-          //   attributes: ['roleName'],
-          // },
-        ],
       });
       res.status(200).send({ success: true, message: users });
     } catch (error) {
@@ -71,11 +65,11 @@ class UserController {
   };
   login = async (req, res) => {
     try {
-      const {email, password} = req.body
+      const { email, password } = req.body;
       const user = await User.findOne({
-        where: {email},
-      })
-      if(!user) throw new Error('Usuario no encontrado')
+        where: { email },
+      });
+      if (!user) throw new Error('Usuario no encontrado');
       res.status(200).send({ success: true, message: 'ok' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });

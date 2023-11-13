@@ -5,8 +5,8 @@ class RecetaController {
 
   createReceta = async (req, res) => {
     try {
-      const { recetaName } = req.body;
-      const newReceta = await Receta.create({ recetaName });
+      const { recetaName, calorias } = req.body;
+      const newReceta = await Receta.create({ recetaName, calorias });
       if (!newReceta) throw new Error('no se pudo crear la receta');
       res.status(200).send({ success: true, message: newReceta });
     } catch (error) {
@@ -16,7 +16,7 @@ class RecetaController {
   getAllRecetas = async (req, res) => {
     try {
       const allRecetas = await Receta.findAll({
-        attributes: ['id', 'recetaName'],
+        attributes: ['id', 'recetaName', 'calorias'],
       });
       res.status(200).send({ success: true, message: allRecetas });
     } catch (error) {

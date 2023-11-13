@@ -1,12 +1,12 @@
-import { Alimento } from '../models/index.js';
+import { Alimento, Receta } from '../models/index.js';
 
 class AlimentoController {
   constructor() {}
 
   createAlimento = async (req, res) => {
     try {
-      const { alimentoName } = req.body;
-      const newAlimento = await Alimento.create({ alimentoName });
+      const { alimentoName, peso } = req.body;
+      const newAlimento = await Alimento.create({ alimentoName, peso });
       if (!newAlimento) throw new Error('no se pudo crear el alimento');
       res.status(200).send({ success: true, message: newAlimento });
     } catch (error) {
@@ -16,7 +16,13 @@ class AlimentoController {
   getAllAlimentos = async (req, res) => {
     try {
       const allAlimentos = await Alimento.findAll({
-        attributes: ['id', 'alimentoName'],
+        attributes: ['id', 'alimentoName', 'peso'],
+        include: [
+          {
+            model: Receta,
+            attributes: ['recetaName'],
+          },
+        ],
       });
       res.status(200).send({ success: true, message: allAlimentos });
     } catch (error) {
@@ -26,8 +32,8 @@ class AlimentoController {
   getAlimentoById = async (req, res) => {
     try {
       const { id } = req.params;
+      const alimento = await Alimento.findById(id);
 
-      const alimento = await Alimento.findByPk(id);
       if (!alimento) throw new Error('No existe el alimento con ese ID');
 
       res.status(200).send({ success: true, message: alimento });
@@ -37,17 +43,18 @@ class AlimentoController {
   };
   updateAlimento = async (req, res) => {
     try {
-      const { alimentoName } = req.body;
+      const { alimentoName, peso } = req.body;
       const { id } = req.params;
       const alimento = await Alimento.update(
-        { alimentoName },
+        { alimentoName, peso },
         {
           where: { id },
         }
       );
-      if (!alimento[0])
-        throw new Error('no se encontro alimento para modificar');
-      res.status(200).send('Alimento updated');
+      if (!alimento[0]) {
+        throw new Error('No se encontró alimento para modificar');
+      }
+      res.status(200).send({ success: true, message: 'Alimento actualizado' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -59,9 +66,10 @@ class AlimentoController {
       const alimento = await Alimento.destroy({
         where: { id },
       });
-
-      if (!alimento) throw new Error('no se encontro alimento para eliminar');
-      res.status(200).send('alimento eliminado');
+      if (!alimento) {
+        throw new Error('No se encontró alimento para eliminar');
+      }
+      res.status(200).send({ success: true, message: 'Alimento eliminado' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }

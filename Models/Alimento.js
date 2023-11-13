@@ -7,8 +7,13 @@ Alimento.init(
   {
     alimentoName: {
       type: DT.STRING(50),
-      // allowNull: false,
-      defaultValue: 'sal',
+      defaultValue: 'x',
+      unique: true,
+    },
+
+    peso: {
+      type: DT.STRING(50),
+      defaultValue: '0',
       unique: true,
     },
   },

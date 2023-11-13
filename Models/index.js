@@ -1,21 +1,15 @@
-// import Role from './Role.js';
 import User from './User.js';
 import Alimento from './Alimento.js';
 import Receta from './Receta.js';
+import AlimentoReceta from './AlimentoReceta.js';
 
-// Role.hasMany(User, {
-//   foreignKey: 'roleId',
-//   //   onDelete: "RESTRICT",
-// });
-// User.belongsTo(Role, { foreignKey: 'roleId' });
-
-Receta.hasMany(Alimento, {
+Receta.belongsToMany(Alimento, {
+  through: 'AlimentoReceta',
   foreignKey: 'recetaId',
-  //   onDelete: "RESTRICT",
 });
-Alimento.belongsTo(Receta, { foreignKey: 'recetaId' });
+Alimento.belongsToMany(Receta, {
+  through: 'AlimentoReceta',
+  foreignKey: 'alimentoId',
+});
 
-// Role.hasMany(User);
-// User.belongsTo(Role);
-
-export { User, Alimento, Receta };
+export { User, Alimento, Receta, AlimentoReceta };
