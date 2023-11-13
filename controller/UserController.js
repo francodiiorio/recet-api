@@ -1,4 +1,7 @@
 import { User } from '../models/index.js';
+import { generateToken, verifyToken } from '../utils/jwt.js';
+
+
 
 class UserController {
   constructor() {}
@@ -67,17 +70,30 @@ class UserController {
     try {
       const { email, password } = req.body;
       const user = await User.findOne({
-        where: { email },
+        where: { email: email },
       });
       if (!user) throw new Error('Usuario no encontrado');
-      res.status(200).send({ success: true, message: 'ok' });
+
+      const validate = await user.validatePassword(password)
+      if(!validate) throw new Error('Contraseña incorrecta')
+
+      const payload = {
+        id: user.id,
+      }
+      
+      const token = generateToken(payload)
+      console.log(token)
+      res.cookie('token', token)
+
+      res.status(200).send({ success: true, message: 'Usuario logueado' });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
   me = async (req, res) => {
     try {
-      res.status(200).send({ success: true, message: 'ok' });
+      const {user} = req;
+      res.status(200).send({ success: true, message: 'ok', data: user });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
