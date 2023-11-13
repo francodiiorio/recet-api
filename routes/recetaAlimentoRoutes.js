@@ -4,14 +4,7 @@ import RecetaAlimentoController from '../controller/RecetaAlimentoController.js'
 const recetaAlimentoRoutes = Router();
 const recetaAlimentoController = new RecetaAlimentoController();
 
-// recetaAlimentoRoutes.post(
-//   '/asociar',
-//   recetaAlimentoController.asociarAlimentoAReceta
-// );
-// recetaAlimentoRoutes.post(
-//   '/eliminar',
-//   recetaAlimentoController.eliminarAsociacion
-// );
+
 recetaAlimentoRoutes.get('', recetaAlimentoController.getAllAlimentosRecetas);
 
 recetaAlimentoRoutes.post('/asociar', async (req, res) => {

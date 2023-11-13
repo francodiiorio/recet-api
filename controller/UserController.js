@@ -82,7 +82,6 @@ class UserController {
       }
       
       const token = generateToken(payload)
-      console.log(token)
       res.cookie('token', token)
 
       res.status(200).send({ success: true, message: 'Usuario logueado' });
